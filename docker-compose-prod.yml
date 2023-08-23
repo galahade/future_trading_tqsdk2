@@ -1,0 +1,38 @@
+version: "3.8"
+services:
+  app:
+    image: galahade/bottom-future-trade-prod:v0.1
+    working_dir: /app
+    volumes:
+      - bottom-future-trade-log-data:/log
+    depends_on:
+      - mongo
+    environment:
+      MONGO_CONF_FILE: /run/secrets/mongo_conf_file
+      TQ_CONF_FILE: /run/secrets/tq_conf_file
+      ROHON_CONF_FILE: /run/secrets/rohon_conf_file
+      ENV_NAME: prod
+    secrets:
+      - mongo_conf_file
+      - tq_conf_file
+      - rohon_conf_file
+  mongo:
+    image: mongo
+    ports:
+      - 26017:26017
+    volumes:
+      - bottom-trade-mongo-data:/data/db
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+volumes:
+  bottom-trade-mongo-data:
+  bottom-future-trade-log-data:
+    external: true
+secrets:
+  mongo_conf_file:
+    file: secrets/mongo_config.yaml
+  tq_conf_file:
+    file: secrets/tq_config.yaml
+  rohon_conf_file:
+    file: secrets/rohon_config.yaml

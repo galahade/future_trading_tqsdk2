@@ -1,0 +1,4 @@
+import os
+
+ENV_NAME = os.environ['ENV_NAME']
+PUSH_KEY="PDU20739T7ZemNBLmqiMV8CYNKUm665tYsoAshLKo"

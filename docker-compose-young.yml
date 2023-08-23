@@ -1,0 +1,45 @@
+version: "3.9"
+services:
+  app:
+    image: galahade/bottom-trade-test:latest
+    working_dir: /app
+    volumes:
+      - bottom-trade-log-data:/log
+    depends_on:
+      - mongo
+    networks:
+      - database
+    environment:
+      MONGO_CONF_FILE: /run/secrets/mongo_conf_file
+      TQ_CONF_FILE: /run/secrets/tq_conf_file
+      ROHON_CONF_FILE: /run/secrets/rohon_conf_file
+      ENV_NAME: test
+    secrets:
+      - mongo_conf_file
+      - tq_conf_file
+      - rohon_conf_file
+  mongo_bottom:
+    image: mongo
+    networks:
+      - database
+    ports:
+      - 26010:27017
+    volumes:
+      - bottom-trade-mongo-young-data:/data/db
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+volumes:
+  bottom-trade-mongo-young-data:
+  bottom-trade-log-data:
+    external: true
+secrets:
+  mongo_conf_file:
+    file: secrets/mongo_config.yaml
+  tq_conf_file:
+    file: secrets/tq_config.yaml
+  rohon_conf_file:
+    file: secrets/rohon_config.yaml
+networks:
+  database:
+    attachable: true

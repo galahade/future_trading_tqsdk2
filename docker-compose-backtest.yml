@@ -1,0 +1,31 @@
+version: "3.8"
+services:
+  app:
+    image: galahade/bottom-future-trade-dev:latest
+    working_dir: /app
+    deploy:
+      restart_policy:
+        condition: none
+    volumes:
+      - ".:/app"
+    environment:
+      MONGO_CONF_FILE: /run/secrets/mongo_conf_file
+      TQ_CONF_FILE: /run/secrets/tq_conf_file
+      ROHON_CONF_FILE: /run/secrets/rohon_conf_file
+      ENV_NAME: backtest
+    secrets:
+      - mongo_conf_file
+      - tq_conf_file
+      - rohon_conf_file
+    command: python3 main.py -t -s 2020 -m 1 -e 2023 -tt 2
+networks:
+  default:
+    name: bottom-backtest-db_database
+    external: true
+secrets:
+  mongo_conf_file:
+    file: secrets/mongo_config.yaml
+  tq_conf_file:
+    file: secrets/tq_config.yaml
+  rohon_conf_file:
+    file: secrets/rohon_config.yaml

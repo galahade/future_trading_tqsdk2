@@ -1,0 +1,49 @@
+version: "3.8"
+services:
+  app:
+    image: galahade/future-trading-test:v0.2
+    working_dir: /app
+    volumes:
+      - ft_test-log-data:/log
+    depends_on:
+      - mongo_db
+    networks:
+      - database
+    environment:
+      SYSTEM_CONFIG_PATH: /run/secrets/system_config_file
+      SYSTEM_CONFIG_BT_PATH: /run/secrets/system_config_file
+      FUTURE_CONFIG_PATH: /run/secrets/future_config_file
+      FUTURE_CONFIG_BT_PATH: /run/secrets/future_config_bt_file
+      ENV_NAME: test
+    secrets:
+      - system_config_file
+      - system_config_bt_file
+      - future_config_file
+      - future_config_bt_file
+  mongo_db:
+    image: mongo
+    networks:
+      - database
+    ports:
+      - 26019:27017
+    volumes:
+      - ft_test-mongo-data:/data/db
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+volumes:
+  ft_test-mongo-data:
+  ft_test-log-data:
+    external: true
+secrets:
+  system_config_file:
+    file: secrets/system_config_test.yaml
+  system_config_bt_file:
+    file: secrets/system_config_backtest_dev.yaml
+  future_config_file:
+    file: conf/trade_config_test.yaml
+  future_config_bt_file:
+    file: conf/trade_config_backtest_dev.yaml
+networks:
+  database:
+    attachable: true

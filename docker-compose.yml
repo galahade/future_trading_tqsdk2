@@ -1,0 +1,43 @@
+version: "3.8"
+services:
+  app:
+    image: galahade/future-trading-dev:latest
+    working_dir: /app
+    volumes:
+      - ".:/app"
+      - future-trading-log-data:/log
+    depends_on:
+      - mongo
+    environment:
+      SYSTEM_CONFIG_PATH: /run/secrets/system_config_file
+      SYSTEM_CONFIG_BT_PATH: /run/secrets/system_config_file
+      FUTURE_CONFIG_PATH: /run/secrets/future_config_file
+      FUTURE_CONFIG_BT_PATH: /run/secrets/future_config_bt_file
+      ENV_NAME: dev
+    secrets:
+      - system_config_file
+      - system_config_bt_file
+      - future_config_file
+      - future_config_bt_file
+  # mongo:
+  #   image: mongo
+  #   ports:
+  #     - 26018:27017
+  #   volumes:
+  #     - bottom-trade-mongo-dev-data:/data/db
+  #   environment:
+  #     MONGO_INITDB_ROOT_USERNAME: root
+  #     MONGO_INITDB_ROOT_PASSWORD: example
+volumes:
+  # bottom-trade-mongo-dev-data:
+  future-trading-log-data:
+    external: true
+secrets:
+  system_config_file:
+    file: secrets/system_config_dev.yaml
+  system_config_bt_file:
+    file: secrets/system_config_backtest_dev.yaml
+  future_config_file:
+    file: conf/trade_config_dev.yaml
+  future_config_bt_file:
+    file: conf/trade_config_backtest_dev.yaml

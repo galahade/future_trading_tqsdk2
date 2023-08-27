@@ -1,7 +1,8 @@
 secrets/
 tags
+# macos
+.DS_Store
 # vscode
-.vscode/
 .VSCodeCounter/
 # pylint
 .pylintrc

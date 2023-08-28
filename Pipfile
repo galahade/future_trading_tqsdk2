@@ -14,6 +14,11 @@ pypushdeer = "*"
 [dev-packages]
 pytest = "*"
 xlwings = "*"
+black = "*"
+isort = "*"
+flake8 = "*"
+mypy = "*"
+pytest-cov = "*"
 
 [requires]
-python_version = "3.11"
+python_version = "3.10"

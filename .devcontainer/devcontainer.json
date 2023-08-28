@@ -5,7 +5,9 @@
     "build": {
         "dockerfile": "Dockerfile",
         "context": "..",
-        "args": {}
+        "args": {
+            "WORKSPACE": "${containerWorkspaceFolder}"
+        }
     },
     "features": {
         "ghcr.io/devcontainers/features/docker-outside-of-docker:1": {}
@@ -29,7 +31,10 @@
                         "source.organizeImports": true
                     }
                 },
-                "isort.args": ["--profile", "black"],
+                "isort.args": [
+                    "--profile",
+                    "black"
+                ],
                 "terminal.integrated.defaultProfile.linux": "zsh",
                 "terminal.integrated.scrollback": 2000,
                 "[jsonc]": {
@@ -37,31 +42,31 @@
                 },
                 "editor.formatOnPaste": false,
                 "editor.formatOnType": false
-             },
+            },
             // Add the IDs of extensions you want installed when the container is created.
             "extensions": [
-				// "formulahendry.code-runner",
+                // "formulahendry.code-runner",
                 //docker
-				"ms-azuretools.vscode-docker",
-				"mutantdino.resourcemonitor",
+                "ms-azuretools.vscode-docker",
+                "mutantdino.resourcemonitor",
                 //python extensions
-				"ms-python.flake8",
-				"matangover.mypy",
-				"donjayamanne.python-environment-manager",
+                "ms-python.flake8",
+                "matangover.mypy",
+                "donjayamanne.python-environment-manager",
                 //git extensions
-				"GitHub.vscode-pull-request-github",
-				"mhutchie.git-graph",
-				"donjayamanne.githistory",
+                "GitHub.vscode-pull-request-github",
+                "mhutchie.git-graph",
+                "donjayamanne.githistory",
                 //intellicode
-				"GitHub.copilot-nightly",
-				"VisualStudioExptTeam.vscodeintellicode",
-				"VisualStudioExptTeam.intellicode-api-usage-examples",
+                "GitHub.copilot-nightly",
+                "VisualStudioExptTeam.vscodeintellicode",
+                "VisualStudioExptTeam.intellicode-api-usage-examples",
                 //editors
-				"redhat.vscode-yaml",
-				"vscodevim.vim",
-				"streetsidesoftware.code-spell-checker",
-				"MS-CEINTL.vscode-language-pack-zh-hans"
-			]
+                "redhat.vscode-yaml",
+                "vscodevim.vim",
+                "streetsidesoftware.code-spell-checker",
+                "MS-CEINTL.vscode-language-pack-zh-hans"
+            ]
         }
     },
     // Use 'forwardPorts' to make a list of ports inside the container available locally.
@@ -81,6 +86,7 @@
     // },
     // Use 'postCreateCommand' to run commands after the container is created.
     // "postCreateCommand": "pip3 install -r requirements.txt",
+    "postCreateCommand": "pipenv install --dev",
     // Comment out to connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
     "remoteUser": "root",
     // claws: use this option to run as root in container, else you can not save file because the project is in /root

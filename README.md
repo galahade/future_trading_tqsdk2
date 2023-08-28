@@ -2,13 +2,40 @@
 
 该系统使用天勤量化提供的`tqsdk`包作为后台交易工具。交易策略为我公司在多年中期交易策略的基础上自主研发。适用于各种品种的期货品种。
 
+## 开发
+
+### 开发环境
+系统：macos
+
+软件：Docker
+
+开发工具：vscode 或 vscode Insides
+
+Vscode 插件：
+
+* dev container
+* docker
+
+### 开发步骤
+
+1. 从 github 上克隆代码至本地。
+
+2. 使用 dev container 的 `在容器中打开`命令构建开发容器
+
+3. 在从容器中打开的命令行中执行 `pipenv install --dev`, 生成python 虚拟环境，并安装开发所需的package
+
+4. 当需要将代码部署至docker中时，首先使用 `pipenv requirements` 根据最新package生成 `requirements.txt` 文件。然后加入一行 `tqsdk2==2.2.7`
+
+5. 运行docker命令生成运行环境并验证程序。
+  
+
 ## 运行系统
 
 ### 系统要求
 
 * python 使用`3.9`版
 
-* `tqsdk==3.4.1`,计划升级至`3.4.6`
+* `tqsdk==2.2.7`
 
 * `mongoDB`的支持
 

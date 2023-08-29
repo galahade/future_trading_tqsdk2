@@ -1,11 +1,7 @@
-from dao.odm.future_config import (
-    FutureConfigInfo, LongConfig, ShortConfig
-)
-from dao.odm.trade_config import (
-    TradeConfigInfo, BacktestDays, Account, RohonAccount
-)
-from utils.config_utils import SystemConfig, FutureConfig
+from dao.odm.future_config import FutureConfigInfo, LongConfig, ShortConfig
+from dao.odm.trade_config import Account, BacktestDays, RohonAccount, TradeConfigInfo
 from utils.common_tools import get_china_tz_now
+from utils.config_utils import FutureConfig, SystemConfig
 
 
 def get_sc_odm():
@@ -20,6 +16,7 @@ def create_sc_odm(config: SystemConfig) -> TradeConfigInfo:
     tq_config = config.tq_config
     rohon_config = config.rohon_config
     sc_odm.direction = t_config.direction  # type: ignore
+    sc_odm.account_type = t_config.account_type
     sc_odm.is_backtest = t_config.is_backtest  # type: ignore
     sc_odm.strategy_ids = t_config.strategies  # type: ignore
     bd = BacktestDays()
@@ -47,7 +44,7 @@ def get_fc_odms() -> list[FutureConfigInfo]:
     return FutureConfigInfo.objects().order_by('symbol')  # type: ignore
 
 
-def craeate_fc_odm(configs: list[FutureConfig]) -> list[FutureConfigInfo]:
+def create_fc_odm(configs: list[FutureConfig]) -> list[FutureConfigInfo]:
     fc_odms = []
     for config in configs:
         fc_odm = FutureConfigInfo()

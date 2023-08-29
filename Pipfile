@@ -4,7 +4,7 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-tqsdk2 = "*"
+tqsdk2 = "==2.2.6"
 pyyaml = "*"
 pymongo = "*"
 mongoengine = "*"

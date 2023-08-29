@@ -1,8 +1,8 @@
-import os
+import logging
+import sys
+
 from headquarters.headquarters import Commander
 from utils import common
-import sys
-import logging
 from utils import global_var as gvar
 
 now = common.now

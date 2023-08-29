@@ -39,6 +39,20 @@ Vscode 插件：
 
 * `mongoDB`的支持
 
+### 安装 mongodb
+
+在 `macOS` 上使用 `HomeBrew`:
+
+```
+brew tap mongodb/brew
+brew update
+brew services start mongodb-community@7.0
+brew services stop mongodb-community@7.0
+brew services list
+mongosh
+
+```
+
 ### 环境变量
 
 * `MONGO_CONF_FILE`: `mongo`数据库相关信息配置文件位置

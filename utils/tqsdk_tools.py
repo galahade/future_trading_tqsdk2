@@ -1,14 +1,14 @@
-import re
 import logging
-from tqsdk.ta import EMA, MACD
-from tqsdk import tafunc
+import re
+
+from tqsdk2 import tafunc
+from tqsdk2.ta import EMA, MACD
 
 from utils.common_tools import get_china_date_from_dt
 
 
 def get_date_str(float_value):
-    ''' 返回格式为：年-月-日 时:分:秒 的字符串
-    '''
+    """返回格式为：年-月-日 时:分:秒 的字符串"""
     return tafunc.time_to_datetime(float_value).strftime("%Y-%m-%d %H:%M:%S")
 
 
@@ -32,7 +32,7 @@ def calc_date_delta(before_value, after_value):
 
 
 def is_zhulian_symbol(_symbol):
-    pattern = re.compile(r'^(KQ.m@)(CFFEX|CZCE|DCE|INE|SHFE).(\w{1,2})$')
+    pattern = re.compile(r"^(KQ.m@)(CFFEX|CZCE|DCE|INE|SHFE).(\w{1,2})$")
     return pattern.match(_symbol)
 
 
@@ -57,9 +57,11 @@ def calc_macd(klines):
     klines["MACD.open"] = 0.0
     klines["MACD.close"] = macd["bar"]
     klines["MACD.high"] = klines["MACD.close"].where(
-        klines["MACD.close"] > 0, 0)
+        klines["MACD.close"] > 0, 0
+    )
     klines["MACD.low"] = klines["MACD.close"].where(
-        klines["MACD.close"] < 0, 0)
+        klines["MACD.close"] < 0, 0
+    )
     klines["diff"] = macd["diff"]
     klines["dea"] = macd["dea"]
 
@@ -101,7 +103,7 @@ def is_decline_2p(kline, l_kline) -> bool:
     # log_str = ('当前K线生成时间{},上一根K线生成时间{},'
     #            '当前K线收盘价{},上一根K线收盘价{}, 跌幅{}')
 
-    result = (l_kline.close - kline.close)/l_kline.close
+    result = (l_kline.close - kline.close) / l_kline.close
     # logger.debug(log_str.format(
     #     get_date(kline.datetime),
     #     get_date(l_kline.datetime),

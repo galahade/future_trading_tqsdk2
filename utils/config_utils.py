@@ -1,13 +1,7 @@
-import os
 from typing import List
-from dotenv import load_dotenv
-from utils.common_tools import get_yaml_config
 
-load_dotenv()
-SYSTEM_CONFIG_PATH = os.getenv('SYSTEM_CONFIG_PATH')
-SYSTEM_CONFIG_BT_PATH = os.getenv('SYSTEM_CONFIG_BT_PATH')
-FUTURE_CONFIG_PATH = os.getenv('FUTURE_CONFIG_PATH')
-FUTURE_CONFIG_BT_PATH = os.getenv('FUTURE_CONFIG_BT_PATH')
+from utils import global_var as gvar
+from utils.common_tools import get_yaml_config
 
 
 class SystemConfig:
@@ -47,9 +41,9 @@ def get_system_config(is_backtest=False) -> SystemConfig:
         SystemConfig: 返回系统配置信息
     """
     if is_backtest:
-        path = SYSTEM_CONFIG_BT_PATH
+        path = gvar.SYSTEM_CONFIG_BT_PATH
     else:
-        path = SYSTEM_CONFIG_PATH
+        path = gvar.SYSTEM_CONFIG_PATH
     return SystemConfig(**get_yaml_config(path))
 
 
@@ -86,9 +80,9 @@ def get_future_configs(is_backtest=False) -> List[FutureConfig]:
     '''
     # is_backtest = True
     if is_backtest:
-        path = FUTURE_CONFIG_BT_PATH
+        path = gvar.FUTURE_CONFIG_BT_PATH
     else:
-        path = FUTURE_CONFIG_PATH
+        path = gvar.FUTURE_CONFIG_PATH
     configs = get_yaml_config(path)
     future_configs = configs['futures']
     open_pos_scale = configs['open_pos_scale']

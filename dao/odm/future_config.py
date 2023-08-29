@@ -1,7 +1,7 @@
 from typing import List
 from mongoengine import (
     Document, EmbeddedDocument, StringField, FloatField,
-    BooleanField,  EmbeddedDocumentField, ListField, IntField)
+    BooleanField, EmbeddedDocumentField, ListField, IntField)
 
 
 class LongConfig(EmbeddedDocument):

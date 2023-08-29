@@ -1,13 +1,19 @@
-from tqsdk import TqApi
+from tqsdk2 import TqApi
 from dao.odm.future_config import FutureConfigInfo
 
 
 class StrategyConfig:
-    '''策略配置'''
-    def __init__(self, api: TqApi, f_info: FutureConfigInfo, direction: int,
-                 is_backtest: bool = False):
+    """策略配置"""
+
+    def __init__(
+        self,
+        api: TqApi,
+        f_info: FutureConfigInfo,
+        direction: int,
+        is_backtest: bool = False,
+    ):
         self.api: TqApi = api
-        self.quote = api.get_quote(f_info.symbol) # type: ignore
+        self.quote = api.get_quote(f_info.symbol)  # type: ignore
         self.f_info = f_info
         self.direction = direction
         self.is_backtest = is_backtest

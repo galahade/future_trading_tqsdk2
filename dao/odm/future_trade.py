@@ -1,9 +1,18 @@
 from datetime import datetime
+
 from mongoengine import (
-    Document, EmbeddedDocument, StringField, IntField, FloatField,
-    DateTimeField, BooleanField,  EmbeddedDocumentField, ListField,
-    ReferenceField, queryset_manager)
-from mongoengine.queryset.visitor import Q
+    BooleanField,
+    DateTimeField,
+    Document,
+    EmbeddedDocument,
+    EmbeddedDocumentField,
+    FloatField,
+    IntField,
+    ListField,
+    ReferenceField,
+    StringField,
+    queryset_manager,
+)
 
 
 class IndicatorValues(EmbeddedDocument):

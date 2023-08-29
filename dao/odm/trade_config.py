@@ -27,6 +27,7 @@ class TradeConfigInfo(Document):
     direction: int = IntField(required=True, default=2)  # type: ignore
     is_backtest: bool = BooleanField(
         required=True, default=False)  # type: ignore
+    # 0:模拟 1:天勤实盘 2: 融航实盘
     account_type: int = IntField(required=True, default=0)  # type: ignore
     account_balance: float = FloatField(default=100000.00)  # type: ignore
     strategy_ids: List[int] = ListField(

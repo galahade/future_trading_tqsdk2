@@ -21,7 +21,7 @@
         "vscode": {
             // Set *default* container specific settings.json values on container create.
             "settings": {
-                // "python.pythonPath": "/usr/local/bin/python",
+                // python
                 "python.languageServer": "Pylance",
                 "python.defaultInterpreterPath": "${workspaceFolder}/.venv/bin/python",
                 "[python]": {
@@ -35,38 +35,47 @@
                     "--profile",
                     "black"
                 ],
+                "flake8.args": ["--ignore=E501"],
+                "black-formatter.args": ["--line-length = 79"],
+                // terminal
                 "terminal.integrated.defaultProfile.linux": "zsh",
                 "terminal.integrated.scrollback": 2000,
+                // json
                 "[jsonc]": {
                     "editor.defaultFormatter": "vscode.json-language-features"
                 },
+                // editor
                 "editor.formatOnPaste": false,
-                "editor.formatOnType": false
+                "editor.formatOnType": false,
+                // system
+                "window.zoomLevel": 1
             },
             // Add the IDs of extensions you want installed when the container is created.
             "extensions": [
-                // "formulahendry.code-runner",
-                //docker
-                "ms-azuretools.vscode-docker",
-                "mutantdino.resourcemonitor",
-                //python extensions
-                "ms-python.flake8",
-                "matangover.mypy",
-                "donjayamanne.python-environment-manager",
-                //git extensions
-                "GitHub.vscode-pull-request-github",
-                "mhutchie.git-graph",
-                "donjayamanne.githistory",
-                //intellicode
-                "GitHub.copilot-nightly",
-                "VisualStudioExptTeam.vscodeintellicode",
-                "VisualStudioExptTeam.intellicode-api-usage-examples",
-                //editors
-                "redhat.vscode-yaml",
-                "vscodevim.vim",
-                "streetsidesoftware.code-spell-checker",
-                "MS-CEINTL.vscode-language-pack-zh-hans"
-            ]
+                // docker
+				"ms-azuretools.vscode-docker",
+				"mutantdino.resourcemonitor",
+                // python extensions
+                "ms-python.isort",
+				"ms-python.python",
+				"ms-python.flake8",
+				"matangover.mypy",
+				"ms-python.black-formatter",
+				"donjayamanne.python-environment-manager",
+                // git extensions
+				"GitHub.vscode-pull-request-github",
+				"mhutchie.git-graph",
+				"donjayamanne.githistory",
+                // intellicode
+				"GitHub.copilot-nightly",
+				"VisualStudioExptTeam.vscodeintellicode",
+				"VisualStudioExptTeam.intellicode-api-usage-examples",
+                // editors
+				"redhat.vscode-yaml",
+				"vscodevim.vim",
+				"streetsidesoftware.code-spell-checker",
+				"MS-CEINTL.vscode-language-pack-zh-hans"
+			]
         }
     },
     // Use 'forwardPorts' to make a list of ports inside the container available locally.
